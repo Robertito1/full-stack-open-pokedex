@@ -14,7 +14,9 @@ job:
      with: 
        node-version: '12.x'
    - name: npm install
-       run: npm install
+       run: |
+       npm install
    - name: npm lint
-       run: npm run eslint
+       run: |
+       npm run eslint
        

@@ -30,4 +30,6 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
+          browser: chrome
+          headless: true
           wait-on: http://localhost:5000

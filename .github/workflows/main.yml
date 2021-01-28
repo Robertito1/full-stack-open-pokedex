@@ -17,3 +17,4 @@ jobs:
           heroku_email: "orazurobert@yahoo.com"
           healthcheck: "https://fullstack-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true

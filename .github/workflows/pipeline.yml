@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   pipeline_job:
@@ -23,11 +26,3 @@ jobs:
         run: |
           npm run build
       - name: npm test
-        run: |
-          npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start
-          wait-on: http://localhost:5000

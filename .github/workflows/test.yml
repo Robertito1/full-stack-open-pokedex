@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 jobs:
   a_test_job:
     runs-on: ubuntu-18.04
@@ -21,6 +23,5 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_STRING: join($COMMIT_MESSAGES, ",")
-        if: ${{ github.event_name == 'push' && !contains("$COMMIT_STRING", '#skip')}}
+        if: ${{ github.event_name == 'push' && !contains(join($COMMIT_MESSAGES, ","), '#skip')}}
         run: echo "$COMMIT_STRING"

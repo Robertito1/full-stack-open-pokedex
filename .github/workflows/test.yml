@@ -21,6 +21,6 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_STRING: join($COMMIT_MESSAGES, ', ')
-        if: ${{ github.event_name == 'push' && !contains($COMMIT_STRING, '#skip')}}
+          COMMIT_STRING: join($COMMIT_MESSAGES, ",")
+        if: ${{ github.event_name == 'push' && !contains("$COMMIT_STRING", '#skip')}}
         run: echo "$COMMIT_STRING"

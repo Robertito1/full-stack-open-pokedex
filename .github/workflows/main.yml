@@ -19,7 +19,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstack-pokedex"
           heroku_email: "orazurobert@yahoo.com"
-          healthcheck: "https://fullstack-pokedex.herokuapppp.com/health"
+          healthcheck: "https://fullstack-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - name: Bump version and push tag

@@ -28,10 +28,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: true
-      - uses: 8398a7/action-slack@v3
+      - name: Slack success notification
+        uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+          status: custom
+          fields: commit,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: 'good',
+                text: `a new version deployed to https://fullstack-pokedex.herokuapp.com/ (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always()
+          if: ${{ steps.deploy.outcome == 'success'}}
